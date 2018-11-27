@@ -1,0 +1,17 @@
+{
+  "name": "lab_9",
+  "version": "1.0.0",
+  "description": "This is lab 9 of CS546",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Hem Shah",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0"
+  }
+}
