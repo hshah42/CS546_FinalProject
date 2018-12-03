@@ -1,0 +1,115 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Activity</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Activity Tracker</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Create</span> </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+                 <ul class="navbar-nav my-1 my-lg-0" style="padding-right:2em">
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Profile
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item active" href="#">My Profile<span class="sr-only">(current)</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <main style=" background-image: url('../../public/images/signup.jpg');">
+
+        <div class="card">
+            <div class="card-body">
+                <h1 class="display-4 text-center" >My Profile!</h1>
+            </div>
+        </div>
+        <br/>
+
+        <div class="card col-lg-6" style="margin: 0 auto; width:80%;">
+                <form action="#" method="POST">
+
+                    <br/>
+
+                    <div class="form-group">
+                        <label for="usersName">Name</label>
+                        <input type="text" required="true" class="form-control" id="usersName" value="test">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userName">Username</label>
+                        <input type="text" class="form-control" id="userName" required="true" value="test" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userEmail">Email</label>
+                        <input type="email" class="form-control" id="userEmail" required="true" value="test" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newUserPassword">Password</label>
+                        <input type="password" class="form-control" id="newUserPassword" required="true" value="test">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usersPhoneNumber">Contact Number</label>
+                        <input type="number" class="form-control" id="usersPhoneNumber" value="test">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usersInterests">Interests</label>
+                        <textarea class="form-control" rows="5" id="usersInterests" required="true" placeholder="Separate each interest by ','">test</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usersAge">Age:</label>
+                        <input type="number" class="form-control" id="usersAge" value="test">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usersSecurityQuestion">Security Question</label>
+                        <input type="text" class="form-control" id="usersSecurityQuestion" required="true" value="test">
+                    </div>
+
+                     <div class="form-group">
+                        <label for="usersSecurityAnswer">Security Answer</label>
+                        <input type="text" class="form-control" id="usersSecurityAnswer" required="true" value="test">
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-success">Update</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
