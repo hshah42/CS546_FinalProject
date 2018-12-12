@@ -10,8 +10,16 @@
   "author": "Hem Shah",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "client-sessions": "^0.8.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
-    "express-handlebars": "^3.0.0"
+    "express-handlebars": "^3.0.0",
+    "jquery": "^3.3.1",
+    "mongod": "^2.0.0",
+    "mongodb": "^3.1.10",
+    "uuid": "^3.3.2"
   }
 }
