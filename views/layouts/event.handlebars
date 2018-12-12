@@ -12,13 +12,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/events">Events</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Create</span> </a>
+                        <a class="nav-link" href="/createEvents">Create</span> </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact Us</a>
@@ -30,8 +30,8 @@
                             Profile
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item active" href="#">My Profile<span class="sr-only">(current)</a>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item active" href="/profile">My Profile<span class="sr-only">(current)</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -70,25 +70,26 @@
         <div class="card" style="width: 75%; margin: 0 auto; float: none; margin-bottom: 10px; height: auto">
             <div class="row justify-content-center" style="padding-left: 10%">
                 <div class="col-sm-8">
-                    <h2 class="mt-4">{{ event.name }}</h2>
+                    <h2 class="mt-4">{{ event.eventName }}</h2>
                     <h3 class="mt-4">Description:</h3>
-                    <p>{{ event.description }}</p>
+                    <p>{{ event.eventDescription }}</p>
                     
                     <h4 id="commentTitle" >Comments:</h4>
-
-                     <div id="comments">
-                        <div class="card">
-                            <div class="card-header" style="font-weight: bold">
-                                Username
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">What an event!</p>
-                            </div>
+                        
+                        <div id="comments">
+                            {{#each event.comments}}
+                                <div class="card">
+                                    <div class="card-header" style="font-weight: bold">
+                                        {{ userName }}
+                                    </div>
+                                <div class="card-body">
+                                    <p class="card-text">{{ comment }}</p>
+                                </div>
+                                </div>
+                                <br>
+                            {{/each}}
                         </div>
-                        <br>
-                       
-                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <form id="commentBox">
@@ -104,17 +105,21 @@
                 <div class="col-sm-4">
                     <br>
                     <p>
-                        <a class="btn btn-outline-success btn-lg" href="#">Register</a>
+                        <form id="registerButton">
+                            <input type="hidden" id="eventId" value="{{ event._id }}"/>
+                            <button type="submit" id="registerSubmitButton" class="btn btn-outline-success btn-lg">Register</button>
+                        </form>
                     </p>
                     <h3 class="mt-4">Location</h3>
                     <address>
-                        <strong>{{ event.addressLine1 }}</strong>
-                        <br>{{ event.addressLine2 }}
-                        <br>{{ event.city }}, {{ event.state }} {{ event.zip }}
+                        <strong>{{ event.eventAddressLine1 }}</strong>
+                        <br>{{ event.eventAddressLine2 }}
+                        <br>{{ event.eventCity }}, {{ event.eventState }} {{ event.eventZipCode }}
                     </address>
                     <address>
-                        <br><b>Date:</b> {{ event.date }}
-                        <br><b>Time:</b> {{ event.time }}
+                        <br><b>Date:</b> {{ event.eventDate }}
+                        <br><b>Start Time:</b> {{ event.eventStartTime }}
+                        <br><b>End Time:</b> {{ event.eventEndTime }}
                         <br>
                     </address>
                     <address>
@@ -127,6 +132,26 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="successModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Registration Status</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                     <div class="modal-body">
+                        <p>Success</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+             </div>
+        </div>
+
     </main>
     <footer>
     </footer>

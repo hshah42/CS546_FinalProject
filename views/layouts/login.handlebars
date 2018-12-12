@@ -12,22 +12,22 @@
                 <img style="max-width: 100%; max-height: 100%" src="../../public/images/logo2.png">
             </div>
             <div class="col-lg-6 h-100" style="align-items: center; min-height: 100%; min-height: 100vh; display: flex;">
-                <form style="margin: 0 auto; width:80%;" action="#" method="POST">
+                <form style="margin: 0 auto; width:80%;" method="POST">
                     <h1>Activities!</h1>
                     <br/>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <label for="username">Email address</label>
+                        <input type="email" class="form-control" id="username" aria-describedby="emailHelp" name="username" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <a href="#" class="badge badge-pill badge-warning">Forgot username/password?</a>
                     <br/>
                     <br/>
-                    <button type="submit" class="btn btn-outline-success">Sign In</button>
-                    <button type="submit" class="btn btn-outline-info">Sign Up</button>
+                    <button type="submit" value="Submit" id="submit" formaction="/login" class="btn btn-outline-success">Sign In</button>
+                    <button type="submit" value="Submit" id="submit" formaction="/signupPage" class="btn btn-outline-info">Sign Up</button>
                 </form>
             </div>
         </div>
