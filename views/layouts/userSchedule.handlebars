@@ -11,17 +11,17 @@
             <a class="navbar-brand" href="#">Activity Tracker</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Home</a>
-                    </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/events">Events <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/events">Events</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/createEvents">Create</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/schedule">My Schedule</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/schedule">My Schedule <span class="sr-only">(current)</span> </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact Us</a>
@@ -33,11 +33,12 @@
                             Profile
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/profile">My Profile</a>
-                            <a class="dropdown-item" href="/logout">Logout</a>
+                            <a class="dropdown-item" href="#">My Profile</a>
+                            <a class="dropdown-item" href="#">Logout</a>
                         </div>
                     </li>
                 </ul>
+                
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -48,38 +49,9 @@
     <main>
         <div class="card">
             <div class="card-body">
-                <h1 class="display-4 text-center" >Events</h1>
+                <h1 class="display-4 text-center" >Upcoming Events</h1>
             </div>
         </div>
-        <div class="card card-outline-primary mb-3 text-center">
-            <div class="card-body justify-content-center" style="margin: 0 auto;">
-                <form class="form-inline" action="/searchEvent" method="POST">
-
-                    <div class="form-group">
-                        <label for="eventName">Event Name</label>
-                        <input type="text" id="eventName" name="eventName" class="form-control mx-sm-3">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="eventType">Event Type</label>
-                        <input type="text" id="eventType" name="eventType" class="form-control mx-sm-3">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Zipcode</label>
-                        <input type="text" id="address" name="address" class="form-control mx-sm-3">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="eventDate">Date</label>
-                        <input type="Date" id="eventDate" name="eventDate" class="form-control mx-sm-3">
-                    </div>
-
-                    <button type="submit" id="submit" value = "submit" class="btn btn-primary">Filter</button>
-                </form>
-            </div>
-        </div>
-        
         <br/>
         
         <div class="container">
@@ -101,22 +73,23 @@
       </div>
 
     </main>
-    <footer>
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
 
+    <footer class="page-footer font-small indigo">
+        <div class="footer-copyright text-center py-3 ">© 2018 Copyright</div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

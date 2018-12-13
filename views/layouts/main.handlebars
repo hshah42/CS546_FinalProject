@@ -21,6 +21,9 @@
                         <a class="nav-link" href="/createEvents">Create</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/schedule">My Schedule</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Contact Us</a>
                     </li>
                 </ul>
@@ -58,9 +61,9 @@
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top" src="../../public/images/event.jpg"/>
                         <div class="card-body">
-                            <h5 class="card-title">{{name}}</h5>
-                            <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >{{ description }}</p>
-                            <a href="/event?:{{ id }}" class="btn btn-outline-primary">Event Details</a>
+                            <h5 class="card-title">{{eventName}}</h5>
+                            <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >{{ eventDescription }}</p>
+                            <a href="/event?id={{ _id }}" class="btn btn-outline-primary">Event Details</a>
                         </div>
                     </div>
                 </div>

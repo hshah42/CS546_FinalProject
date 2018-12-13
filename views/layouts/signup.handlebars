@@ -34,56 +34,55 @@
         <br/>
 
         <div class="card col-lg-6" style="margin: 0 auto; width:80%;">
-                <form action="#" method="POST">
-
+                <form action="/signup" method="POST">
                     <br/>
 
                     <div class="form-group">
                         <label for="usersName">Name</label>
-                        <input type="text" required="true" class="form-control" id="usersName">
+                        <input type="text" required="true" class="form-control" id="usersName" name="usersName">
                     </div>
 
                     <div class="form-group">
                         <label for="userName">Username</label>
-                        <input type="text" class="form-control" id="userName" required="true">
+                        <input type="text" class="form-control" id="userName" required="true" name="userName">
                     </div>
 
                     <div class="form-group">
                         <label for="userEmail">Email</label>
-                        <input type="email" class="form-control" id="userEmail" required="true">
+                        <input type="email" class="form-control" id="userEmail" name="userEmail" required="true">
                     </div>
 
                     <div class="form-group">
                         <label for="newUserPassword">Password</label>
-                        <input type="password" class="form-control" id="newUserPassword" required="true">
+                        <input type="password" class="form-control" id="newUserPassword" name="newUserPassword" required="true">
                     </div>
 
                     <div class="form-group">
                         <label for="usersPhoneNumber">Contact Number</label>
-                        <input type="number" class="form-control" id="usersPhoneNumber">
+                        <input type="number" class="form-control" id="usersPhoneNumber" name="usersPhoneNumber">
                     </div>
 
                     <div class="form-group">
                         <label for="usersInterests">Interests</label>
-                        <textarea class="form-control" rows="5" id="usersInterests" required="true" placeholder="Separate each interest by ','"></textarea>
+                        <textarea class="form-control" rows="5" id="usersInterests" name="usersInterests" required="true" placeholder="Separate each interest by ','"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="usersAge">Age:</label>
-                        <input type="number" class="form-control" id="usersAge" required="true">
+                        <input type="number" class="form-control" id="usersAge" name="usersAge" required="true">
                     </div>
 
                     <div class="form-group">
                         <label for="usersSecurityQuestion">Security Question</label>
-                        <input type="text" class="form-control" id="usersSecurityQuestion" required="true">
+                        <input type="text" class="form-control" id="usersSecurityQuestion" name="usersSecurityQuestion" required="true">
                     </div>
 
                      <div class="form-group">
                         <label for="usersSecurityAnswer">Security Answer</label>
-                        <input type="text" class="form-control" id="usersSecurityAnswer" required="true">
+                        <input type="text" class="form-control" id="usersSecurityAnswer" name="usersSecurityAnswer" required="true">
                     </div>
 
-                    <button type="submit" class="btn btn-outline-success">Sign Up</button>
+                    <button type="submit" id="submit" name="submit" value="Submit" class="btn btn-outline-success">Sign Up</button>
                 </form>
             </div>
         </div>

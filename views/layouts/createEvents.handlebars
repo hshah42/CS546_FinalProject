@@ -21,6 +21,9 @@
                         <a class="nav-link" href="/createEvents">Create <span class="sr-only">(current)</span> </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/schedule">My Schedule</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Contact Us</a>
                     </li>
                 </ul>
@@ -52,82 +55,82 @@
         <br/>
 
         <div class="card col-lg-6" style="margin: 0 auto; width:80%;">
-                <form action="#" method="POST">
+                <form method="POST">
 
                     <br/>
 
                     <div class="form-group">
                         <label for="eventName">Event Name</label>
-                        <input type="text" required="true" class="form-control" id="eventName" placeholder="Enter name">
+                        <input type="text" required="true" class="form-control" id="eventName" name="eventName">
                     </div>
 
                     <div class="form-group">
                         <label for="eventDate">Event Date</label>
-                        <input type="Date" class="form-control" id="eventDate" required="true">
+                        <input type="Date" class="form-control" id="eventDate" name="eventDate" required="true">
                     </div>
 
                     <div class="form-group">
                         <label for="eventAddressLine1">Address Line 1</label>
-                        <input type="text" class="form-control" id="eventAddressLine1" required="true">
+                        <input type="text" class="form-control" id="eventAddressLine1" name="eventAddressLine1" required="true">
                     </div>
 
                     <div class="form-group">
                         <label for="eventAddressLine2">Address Line 2</label>
-                        <input type="text" class="form-control" id="eventAddressLine2">
+                        <input type="text" class="form-control" id="eventAddressLine2" name="eventAddressLine2">
                     </div>
 
                     <div class="form-group">
                         <label for="eventCity">City / Town</label>
-                        <input type="text" class="form-control" id="eventCity" required="true">
+                        <input type="text" class="form-control" id="eventCity" required="true" name="eventCity">
                     </div>
 
                     <div class="form-group">
                         <label for="eventState">State / Province / Region</label>
-                        <input type="text" class="form-control" id="eventState" required="true">
+                        <input type="text" class="form-control" id="eventState" required="true" name="eventState">
                     </div>
 
                     <div class="form-group">
                         <label for="eventZipCode">Zip / Postal Code</label>
-                        <input type="text" class="form-control" id="eventZipCode" required="true">
+                        <input type="text" class="form-control" id="eventZipCode" required="true" name="eventZipCode">
                     </div>
 
                     <div class="form-group">
                         <label for="eventCountry">Country</label>
-                        <input type="text" class="form-control" id="eventCountry" required="true">
+                        <input type="text" class="form-control" id="eventCountry" required="true" name="eventCountry">
                     </div>
 
                     <div class="form-group">
                         <label for="eventStartTime">Start Time</label>
-                        <input type="time" class="form-control" id="eventStartTime" required="true">
+                        <input type="time" class="form-control" id="eventStartTime" required="true" name="eventStartTime">
                     </div>
 
                     <div class="form-group">
                         <label for="eventEndTime">End Time</label>
-                        <input type="time" class="form-control" id="eventEndTime" required="true">
+                        <input type="time" class="form-control" id="eventEndTime" required="true" name="eventEndTime">
                     </div>
 
                     <div class="form-group">
                         <label for="eventDescription">Description</label>
-                        <textarea class="form-control" rows="5" id="eventDescription" required="true"></textarea>
+                        <textarea style="white-space: pre-wrap;" class="form-control" rows="5" id="eventDescription" required="true" name="eventDescription"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="eventTags">Tags</label>
-                        <textarea class="form-control" rows="2" id="eventTags" placeholder="Separate each tag by ','"></textarea>
+                        <textarea class="form-control" rows="2" id="eventTags" placeholder="Separate each tag by ','" name="eventTags"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="eventRequirements">Requirements</label>
-                        <textarea class="form-control" rows="2" id="eventRequirements" placeholder="Separate each requirement by ','"></textarea>
+                        <textarea class="form-control" rows="2" id="eventRequirements" name="eventRequirements" placeholder="Separate each requirement by ','"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="eventRegisterationLimit">Limit</label>
-                        <input type="number" class="form-control" id="eventRegisterationLimit">
+                        <input type="number" class="form-control" id="eventRegisterationLimit" name="eventRegisterationLimit">
                     </div>
 
-                    <button type="submit" class="btn btn-outline-success">Create</button>
-                    <button type="submit" class="btn btn-outline-danger">Cancel</button>
+                    <button type="submit" value="Submit" id="submit" class="btn btn-outline-success" formaction="/createEvent">Create</button>
+                    {{!-- <button type="submit" class="btn btn-outline-danger">Cancel</button> --}}
                 </form>
             </div>
         </div>
