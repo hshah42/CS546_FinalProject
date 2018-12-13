@@ -69,133 +69,140 @@ app.post("/createEvent", async function(req, res)
 
   let event = {};
 
-  if(body.eventName)
+  if(body["eventName"])
   {
-    event["eventName"] = body.eventName;
+    event["eventName"] = body["eventName"];
   }
   else
   {
     errors.push("Event Name is not present");
   }
 
-  if(body.eventDate)
+  if(body["eventDate"])
   {
-    event["eventDate"] = body.eventDate;
+    event["eventDate"] = body["eventDate"];
   }
   else
   {
     errors.push("Event date is not present");
   }
 
-  if(body.eventDate)
+  if(body["eventAddressLine1"])
   {
-    event["eventDate"] = body.eventDate;
-  }
-  else
-  {
-    errors.push("Event date is not present");
-  }
-
-  if(body.eventAddressLine1)
-  {
-    event["eventAddressLine1"] = body.eventAddressLine1;
+    event["eventAddressLine1"] = body["eventAddressLine1"];
   }
   else
   {
     errors.push("Event Address is not present");
   }
 
-  if(body.eventAddressLine2)
+  if(body["eventAddressLine2"])
   {
-    event["eventAddressLine2"] = body.eventAddressLine2;
+    event["eventAddressLine2"] = body["eventAddressLine2"];
   }
 
-  if(body.eventCity)
+  if(body["eventCity"])
   {
-    event["eventCity"] = body.eventCity;
+    event["eventCity"] = body["eventCity"];
   }
   else
   {
     errors.push("Event City is not present");
   }
 
-  if(body.eventState)
+  if(body["eventState"])
   {
-    event["eventState"] = body.eventState;
+    event["eventState"] = body["eventState"];
   }
   else
   {
     errors.push("Event State is not present");
   }
   
-  if(body.eventZipCode)
+  if(body["eventZipCode"])
   {
-    event["eventZipCode"] = body.eventZipCode;
+    event["eventZipCode"] = body["eventZipCode"];
   }
   else
   {
     errors.push("Event Zip code is not present");
   }
 
-  if(body.eventCountry)
+  if(body["eventCountry"])
   {
-    event["eventCountry"] = body.eventCountry;
+    event["eventCountry"] = body["eventCountry"];
   }
   else
   {
     errors.push("Event Country is not present");
   }
 
-  if(body.eventStartTime)
+  if(body["eventStartTime"])
   {
-    event["eventStartTime"] = body.eventStartTime;
+    event["eventStartTime"] = body["eventStartTime"];
   }
   else
   {
     errors.push("Event Start time is not present");
   }
 
-  if(body.eventEndTime)
+  if(body["eventEndTime"])
   {
-    event["eventEndTime"] = body.eventEndTime;
+    event["eventEndTime"] = body["eventEndTime"];
   }
   else
   {
     errors.push("Event End time is not present");
   }
 
-  if(body.eventDescription)
+  if(body["eventDescription"])
   {
-    event["eventDescription"] = body.eventDescription;
+    event["eventDescription"] = body["eventDescription"];
   }
   else
   {
     errors.push("Event Description is not present");
   }
 
-  if(body.eventTags)
+  if(body["eventTags"])
   {
-    let tags = body.eventTags.split(",");
-    event["eventTags"] = tags;
+    let tags = body["eventTags"].split(",");
+    let normalizedData = new Array();
+
+    for(let index in tags)
+    {
+      normalizedData.push(tags[index].trim());
+    }
+    event["eventTags"] = normalizedData;
   }
 
-  if(body.eventRequirements)
+  if(body["eventRequirements"])
   {
-    let eventRequirements = body.eventRequirements.split(",");
-    event["eventRequirements"] = eventRequirements;
+    let eventRequirements = body["eventRequirements"].split(",");
+    let normalizedData = new Array();
+
+    for(let index in eventRequirements)
+    {
+      normalizedData.push(eventRequirements[index].trim());
+    }
+
+    event["eventRequirements"] = normalizedData;
   }
 
-  if(body.eventRegisterationLimit)
+  if(body["eventRegisterationLimit"])
   {
-    event["eventRegisterationLimit"] = body.eventRegisterationLimit;
+    event["eventRegisterationLimit"] = body["eventRegisterationLimit"];
   }
   else
   {
     event["eventRegisterationLimit"] = Number.MAX_VALUE;
   }
 
-	const addOne = await UserCollection.insertOne(event);
-  
+  let admin = await getUserByUsername(req.session.user);
+
+  event["creatorPhone"] = admin.usersPhoneNumber;
+  event["creatorEmail"] = admin.userEmail;
+    
   if(errors.length > 0)
   {
     //TODO a lot of things
@@ -207,7 +214,10 @@ app.post("/createEvent", async function(req, res)
 	
 	  if(addEventStatus)
 	  {
-		  res.render("layouts/home");
+      let userData = await getUserByUsername(req.session.user);
+      let myEvents = await getActivitiesByArray(userData.usersInterests);
+
+		  res.render("layouts/main", { currUser:currUser , events : myEvents });
 	  }
 	  else
 	  {
@@ -223,8 +233,10 @@ app.post("/register", async function(req, res)
     let userName = req.session.user;
     let userData = await getUserByUsername(userName);
     let eventId = req.body.eventId;
+    let event = await getEventById(eventId);
 
     let success = await registerUser(userData._id, eventId);
+    await addSchedule(eventId, userData._id, event.eventDate);
 
     res.send({"stat" : "registered"});
   }
@@ -268,14 +280,20 @@ app.post("/searchEvent", async function(req, res)
 	
 	let searchRes = await searchEvents(searchObj);
 	
-	res.render("layouts/events", searchRes); 
+	res.render("layouts/events", { events : searchRes}); 
 });
 
-app.post("/signup", function(req, res)
+app.get("/signup" , async function(req, res)
 {
-	res.render("layouts/signup");
+  if(req.session && req.session.user)
+  {
+    res.redirect("/home");
+  }
+  else
+  {
+    res.render("layouts/signup")
+  }
 });
-
 
 app.post("/signup", async function(req, res)
 {
@@ -283,38 +301,50 @@ app.post("/signup", async function(req, res)
 	let signupObj = {};
   let errors = new Array();
 
-  signupObj["_id"] = uuid();
-
-  if(body.usersName)
+  if(body["usersName"])
   {
-    signupObj["usersName"] = body.usersName;
+    signupObj["usersName"] = body["usersName"];
   }
   else
   {
     errors.push("Users name is not entered");
   }
 
-  if(body.userName)
+  if(body["userName"])
   {
-    signupObj["userName"] = body.userName;
+    if(await userNameExists(body["userName"]))
+    {
+      errors.push("User name already in use")
+    }
+    else
+    {
+      signupObj["userName"] = body["userName"];
+    }
   }
   else
   {
     errors.push("Username is not entered");
   }
 
-  if(body.userEmail)
+  if(body["userEmail"])
   {
-    signupObj["userEmail"] = body.userEmail;
+    if(await userNameExists(body["userEmail"]))
+    {
+      errors.push("User email already in use")
+    }
+    else
+    {
+      signupObj["userEmail"] = body["userEmail"];
+    }
   }
   else
   {
     errors.push("User email is not entered");
   }
 
-  if(body.newUserPassword)
+  if(body["newUserPassword"])
   {
-    let hashedPassword = await bcrypt.hash(req.body["newUserPassword"], saltRounds);
+    let hashedPassword = await bcrypt.hash(body["newUserPassword"], saltRounds);
     signupObj["hashedPassword"] = hashedPassword;
   }
   else
@@ -322,54 +352,72 @@ app.post("/signup", async function(req, res)
     errors.push("Users password is not entered");
   }
 
-  if(body.usersPhoneNumber)
+  if(body["usersPhoneNumber"])
   {
-    signupObj["usersPhoneNumber"] = body.usersPhoneNumber;
+    signupObj["usersPhoneNumber"] = body["usersPhoneNumber"];
   }
 
-  if(body.usersInterests)
+  if(body["usersInterests"])
   {
-    let interests = body.usersInterests.split(",");
-    signupObj["interests"] = interests;
+    let interests = body["usersInterests"].split(",");
+    let normalizedData = new Array();
+
+    for(let index in interests)
+    {
+      normalizedData.push(interests[index].trim());
+    }
+
+    signupObj["usersInterests"] = normalizedData;
   }
   else
   {
     errors.push("Users Interests are not present")
   }
   
-  if(body.usersAge)
+  if(body["usersAge"])
   {
-    signupObj["usersAge"] = body.usersAge;
+    signupObj["usersAge"] = body["usersAge"];
   }
   else
   {
     errors.push("User age is not entered");
   }
 
-  if(body.usersSecurityQuestion)
+  if(body["usersSecurityQuestion"])
   {
-    signupObj["usersSecurityQuestion"] = body.usersSecurityQuestion;
+    signupObj["usersSecurityQuestion"] = body["usersSecurityQuestion"];
   }
   else
   {
     errors.push("User Security Question is not entered");
   }
 
-  if(body.usersSecurityAnswer)
+  if(body["usersSecurityAnswer"])
   {
-    signupObj["usersSecurityAnswer"] = body.usersSecurityAnswer;
+    signupObj["usersSecurityAnswer"] = body["usersSecurityAnswer"];
   }
   else
   {
     errors.push("User Security Answer is not entered");
   }
 
-	let signupStatus = await addUser(signupObj);
+  if(errors.length > 0)
+  {
+    //TODO
+  }
+  else
+  {
+    let signupStatus = await addUser(signupObj);
 		
-	if(signupStatus)
-  { 
-		res.redirect("/");
-	}
+	  if(signupStatus)
+    { 
+		  res.redirect("/");
+    }
+    else
+    {
+      //TODO
+    }
+  }
 	
 });
 
@@ -404,17 +452,17 @@ app.post("/login", async function(req, res){
 			
 			  if(checkIfPresent.usersInterests.length > 0)
 			  {
-				  let activityArr = checkIfPresent.usersInterests.split(",");
-				  activitiesObj = await getActivitiesByArray(activityArr);
+				  activitiesObj = await getActivitiesByArray(checkIfPresent.usersInterests);
         }
         	
 			  currUser1["matchedAct"] = activitiesObj;
 			
 			  currUser = currUser1;
-			  console.log(currUser);
 			
-			  res.render("layouts/main", currUser);
-		  }
+        let userData = await getUserByUsername(req.session.user);
+        let myEvents = await getActivitiesByArray(userData.usersInterests);
+    
+        res.render("layouts/main", { currUser:currUser , events : myEvents });		  }
 		
 		  }
 		
@@ -432,7 +480,10 @@ app.get("/", async function (req, res){
 	
 		if(req.session && req.session.user)
 		{
-			res.render("layouts/main", currUser);
+			let userData = await getUserByUsername(req.session.user);
+      let myEvents = await getActivitiesByArray(userData.usersInterests);
+
+		  res.render("layouts/main", { currUser:currUser , events : myEvents });
 		}
 		else
 		{
@@ -452,10 +503,41 @@ app.get("/profile", async function(req, res)
   }
 });
 
+app.get("/schedule", async function(req, res)
+{
+  if(req.session && req.session.user)
+	{
+    let userData = await getUserByUsername(req.session.user);
+
+    let events = await getScheduledActivities(userData._id);
+
+		res.render("layouts/userSchedule", { events : events});
+	}
+	else
+	{
+		res.redirect("/");
+  }
+});
+
 app.get("/event", async function(req, res)
 {
   let eventId = req.query.id;
   let event = await getEventById(eventId);
+
+  let users = new Array();
+
+  for(let index in event.registeredUsers)
+  {
+    let userInfo = await getUserById(event.registeredUsers[index]);
+    let user = {
+      userName : userInfo.userName,
+      usersEmail : userInfo.userEmail
+    };
+
+    users.push(user);
+  }
+
+  event["users"] = users;
 
   res.render("layouts/event", {event : event});
 });
@@ -494,12 +576,12 @@ app.get("/logout", async function(req, res){
 	{
 		loginError = false;
 		req.session.reset();
-		res.clearCookie(cookieName).render("../main/logout", currUser);
+		res.clearCookie(cookieName).render("layouts/login", currUser);
 	}
 	else
 	{
 		loginError = false;
-		res.render("../main/logout1", currUser);
+		res.render("layouts/login", currUser);
 	}
 }); 
 
@@ -523,8 +605,11 @@ app.get("/private", async function(req, res){
 				resObj["Bio"] = arr[j]["Bio"];
 			}
 		}
-		
-		res.render("layouts/main", currUser);
+    
+    let userData = await getUserByUsername(req.session.user);
+    let myEvents = await getActivitiesByArray(userData.usersInterests);
+
+		res.render("layouts/main", { currUser:currUser , events : myEvents });
 	}
 	else
 	{
@@ -538,7 +623,10 @@ app.get("*", async function(req, res)
 	
 	if(req.session && req.session.user)
 	{
-		res.render("layouts/main", currUser);
+    let userData = await getUserByUsername(req.session.user);
+    let myEvents = await getActivitiesByArray(userData.usersInterests);
+
+		res.render("layouts/main", { currUser:currUser , events : myEvents });
 	}
 	else
 	{
@@ -581,7 +669,9 @@ async function findUser(username, password)
 async function addUser(signupObj)
 {
 	let dbUser = await DatabaseUsers();
-	
+  
+  signupObj["_id"] = uuid();
+  
 	let addedUser = await dbUser.insertOne(signupObj);
 	
 	if(addedUser)
@@ -597,34 +687,41 @@ async function addUser(signupObj)
 
 async function searchEvents(searchObj)
 {
-	let queryString = new Object();
+  let queryString = new Object();
 	
 	queryString['$and'] = new Array();
 	
-	if(searchObj.eventName)
+	if(searchObj["eventName"])
 	{
-		queryString['$and'].push({eventName : {$eq : searchObj.eventName}});
-		
+    queryString['$and'].push({eventName : { $regex: new RegExp(searchObj["eventName"], 'i')}});
 	}
 	
-	if(searchObj.eventCategory)
+	if(searchObj["eventType"])
 	{
-		queryString['$and'].push({eventCategory : {$eq : searchObj.eventCategory}});
+		queryString['$and'].push({eventTags : { $regex: new RegExp(searchObj["eventType"], 'i')}});
 	}
 	
-	if(searchObj.eventStartDate)
+	if(searchObj["eventDate"])
 	{
-		queryString['$and'].push({eventStartDate : {$eq : searchObj.eventStartDate}});
+		queryString['$and'].push({eventDate : {$eq : searchObj["eventDate"]}});
 	}
 	
-	if(searchObj.zipCode)
+	if(searchObj["address"])
 	{
-		queryString['$and'].push({"address.zipCode" :{$eq : searchObj.zipCode}});
+		queryString['$and'].push({eventZipCode :{$eq : searchObj["address"]}});
 	}
 
-	let dbEvent = await DatabaseEvents();
-	
-	let searchRes = await dbEvent.find(queryString).toArray();
+  let dbEvent = await DatabaseEvents();
+  let searchRes;
+  
+  if(queryString['$and'].length > 0 )
+  {
+    searchRes = await dbEvent.find(queryString).collation({locale: "en", strength: 2}).toArray();
+  }
+  else
+  {
+    searchRes = await dbEvent.find({}).toArray();
+  }
 	
 	return searchRes;
 };
@@ -657,17 +754,9 @@ async function getEventById(id)
 
 async function getActivitiesByArray(activityArr)
 {
-	let queryString = new Object();
-	queryString['$or'] = new Array();
-	
-	for(let cd=0; cd<activityArr.length; cd++)
-	{
-		queryString['$or'].push({eventName : {$eq : activityArr[cd].trim()}});
-	}
-	
 	let dbEvent = await DatabaseEvents();
 	
-	let searchRes = await dbEvent.find(queryString).toArray();
+	let searchRes = await dbEvent.find({ eventTags : {$in : activityArr} }).toArray();
 	
 	return searchRes;
 };
@@ -721,4 +810,63 @@ async function addComment(userName, comment, eventId)
   let result = await dbEvent.updateOne({ _id : eventId} , { $push : { comments : userComment }});
 
   return true;
+}
+
+async function userNameExists(username)
+{
+  let dbUser = await DatabaseUsers();
+  let user = await dbUser.findOne({ "userName" : username });
+
+  if(user)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+async function emailExists(email)
+{
+  let dbUser = await DatabaseUsers();
+
+  let user = await dbUser.findOne({ "userEmail" : email });
+
+  if(user)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+async function getUserById(id)
+{
+  let dbUser = await DatabaseUsers();
+
+  let user = await dbUser.findOne({"_id" : id});
+
+  return user;
+}
+
+async function addSchedule(eventId, userId, eventDate)
+{
+  let dbUser = await DatabaseUsers();
+  let scheduleInfo = {
+    eventId : eventId,
+    eventDate : eventDate
+  }
+  let result = await dbUser.updateOne({ _id : userId }, { $push : { schedule : scheduleInfo }} );
+}
+
+async function getScheduledActivities(userId)
+{
+  let dbEvent = await DatabaseEvents();
+
+  let events = await dbEvent.find({ "registeredUsers" : userId , "eventDate" : { $gte : new Date().toISOString().slice(0,10)} }).sort({ eventDate : -1 });
+
+  return events.toArray();
 }
