@@ -6,20 +6,51 @@
         let commentDiv = $("#comments");
 
         let registerForm = $("#registerButton");
+		//let buttonIdW = $("#registerWithdrawButton");
+		//let buttonIdR = $("#registerSubmitButton");
         let eventIdField = $("#eventId");
+		
+		//let withdrawForm = $("#registerWithdrawButton");
+		//let userNameField = $("#userName");
+		
+		let registeredStatus = $("#registered");
+		//let Registered = false;
+		
+		
+		
+		
+		//console.log(registeredStatus);
+		
+		if(registeredStatus.val() === "true")
+		{
+			let div = document.createElement("button");
+            div.classList.add("btn");
+            div.classList.add("btn-outline-danger");
+            div.classList.add("btn-lg");
+            div.type = "submit";
+            div.id = "registerWithdrawButton";
+            div.innerHTML = "Withdraw";
+			//Registered = true;
+			this.currButton = "registerWithdrawButton";
 
+			document.getElementById("registerSubmitButton").replaceWith(div);
+		}
+		
         registerForm.submit(function(event)
         {
             event.preventDefault();
 
             let type = this.id;
             let eventId = eventIdField.val();
+			//let userName = userNameField.val();
+			
+			//alert(type);
 
             if(type === "registerButton")
             {
                 let requestConfig = {
                     method : "POST",
-                    url : "/register",
+                    url : "/registerWithdraw",
                     content : "application/json",
                     data : {
                             "eventId" : eventId
@@ -39,17 +70,37 @@
                         div.type = "submit";
                         div.id = "registerWithdrawButton";
                         div.innerHTML = "Withdraw";
+						//this.currButton = "registerWithdrawButton";
 
                         document.getElementById("registerSubmitButton").replaceWith(div);
                     }
+					else
+                    {
+                        $('#successModal').modal("show")
+
+                        let div = document.createElement("button");
+                        div.classList.add("btn");
+                        div.classList.add("btn-outline-success");
+                        div.classList.add("btn-lg");
+                        div.type = "submit";
+                        div.id = "registerSubmitButton";
+                        div.innerHTML = "Register";
+						//this.currButton = "registerWithdrawButton";
+
+                        document.getElementById("registerWithdrawButton").replaceWith(div);
+                    }
                 });
             }
+			
+			
         });
 
         commentForm.submit(function(event)
         {
             event.preventDefault();
-
+				
+			console.log(comment);
+			
             let commentValue = comment.val();
             const urlParams = new URLSearchParams(window.location.search);
             
@@ -99,5 +150,6 @@
                 });
             }
         });
+        
     }
 )(window.jQuery);
