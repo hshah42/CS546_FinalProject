@@ -1,0 +1,124 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Activity</title>
+    <link rel="stylesheet" href="../../public/site.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Activity Tracker</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./main.handlebars">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/events">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/createEvents">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/userListing">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contacts">Contact Us</a>
+                    </li>
+                </ul>
+                 <ul class="navbar-nav my-1 my-lg-0" style="padding-right:2em">
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{currUser}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/profile">My Profile</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+                
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="card">
+            <div class="card-body">
+                <h1 class="display-4 text-center" >Group Members</h1>
+            </div>
+        </div>
+        <br/>
+        <div class="container">
+          <div class="row justify-content-center">
+ 
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card bg-info">
+                        <div class="card-body">
+                            <h5 class="card-title">Hem Shah</h5>
+                            <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >Email: hshah42@stevens.edu</p>
+    
+                        </div>
+						</div>
+                    </div>
+                </div>
+				
+				<div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card bg-success">
+                        <div class="card-body">
+                            <h5 class="card-title">Shrikant Sherkar</h5>
+                            <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >Email: ssherkar@stevens.edu</p>
+    
+                        </div>
+						</div>
+                    </div>
+                </div>
+				
+				<div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card bg-warning">
+                        <div class="card-body">
+                            <h5 class="card-title">Bin Gui</h5>
+                            <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >Email: bgui@stevens.edu</p>
+    
+                        </div>
+						</div>
+                    </div>
+                </div>
+				
+				<div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card bg-danger">
+                        <div class="card-body">
+                            <h5 class="card-title">Nicholas P Cacchione</h5>
+                            <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >Email: ncacchio@stevens.edu</p>
+    
+                        </div>
+						</div>
+                    </div>
+                </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <footer class="page-footer font-small indigo">
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+	<script src="https://rawgit.com/leizongmin/js-xss/master/dist/xss.js"></script>
+<script>
+// apply function filterXSS in the same way
+	filterXSS('<script>alert("xss");</scr' + 'ipt>');
+</script> 
+	</body>
+</html> 

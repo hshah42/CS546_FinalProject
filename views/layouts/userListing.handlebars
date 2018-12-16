@@ -14,14 +14,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/home">Home</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/events">Events <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/events">Events</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/createEvents">Create</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/userListing">Users</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/userListing">Users<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contacts">Contact Us</a>
@@ -48,33 +48,25 @@
     <main>
         <div class="card">
             <div class="card-body">
-                <h1 class="display-4 text-center" >Events</h1>
+                <h1 class="display-4 text-center" >Users</h1>
             </div>
         </div>
+
         <div class="card card-outline-primary mb-3 text-center">
             <div class="card-body justify-content-center" style="margin: 0 auto;">
-                <form class="form-inline" action="/searchEvent" method="POST">
-
+                <form class="form-inline" action="/searchUser" method="POST">
                     <div class="form-group">
-                        <label for="eventName">Event Name</label>
-                        <input type="text" id="eventName" name="eventName" class="form-control mx-sm-3">
+                        <label for="userName">Username</label>
+                        <input type="text" id="userName" name="userName" class="form-control mx-sm-3">
                     </div>
-                    
                     <div class="form-group">
-                        <label for="eventType">Event Type</label>
-                        <input type="text" id="eventType" name="eventType" class="form-control mx-sm-3">
+                        <label for="userEmail">Email</label>
+                        <input type="email" id="userEmail" name="userEmail" class="form-control mx-sm-3">
                     </div>
-
                     <div class="form-group">
-                        <label for="address">Zipcode</label>
-                        <input type="text" id="address" name="address" class="form-control mx-sm-3">
+                        <label for="usersName">Name</label>
+                        <input type="text" id="usersName" name="usersName" class="form-control mx-sm-3">
                     </div>
-
-                    <div class="form-group">
-                        <label for="eventDate">Date</label>
-                        <input type="Date" id="eventDate" name="eventDate" class="form-control mx-sm-3">
-                    </div>
-
                     <button type="submit" id="submit" value = "submit" class="btn btn-primary">Filter</button>
                 </form>
             </div>
@@ -84,18 +76,13 @@
         
         <div class="container">
           <div class="row justify-content-center">
-            {{#each events}}
+            {{#each users}}
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-					    {{#if eventImage.path}}
-                            <img class="card-img-top" src="{{eventImage.path}}" height="300" width="50"/>
-                        {{else}}
-						    <img class="card-img-top" src="\imageUploads\images.JPG" height="300" width="50"/>
-					    {{/if}}
                         <div class="card-body">
-                            <h5 class="card-title">{{eventName}}</h5>
-                            <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >{{ eventDescription }}</p>
-                            <a href="/event?id={{ _id }}" class="btn btn-outline-primary">Event Details</a>
+                            <h5 class="card-title">{{userName}}</h5>
+                            <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >{{ usersEmail }}</p>
+                            <a href="/user?id={{ _id }}" class="btn btn-outline-primary">Profile</a>
                         </div>
                     </div>
                 </div>
@@ -114,6 +101,5 @@
 <script>
 filterXSS('<script>alert("xss");</scr' + 'ipt>');
 </script> 
-	
 	</body>
 </html> 

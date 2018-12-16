@@ -21,20 +21,20 @@
                         <a class="nav-link" href="/createEvents">Create</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/schedule">My Schedule</a>
+                        <a class="nav-link" href="/userListing">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
+                        <a class="nav-link" href="/contacts">Contact Us</a>
                     </li>
                 </ul>
                  <ul class="navbar-nav my-1 my-lg-0" style="padding-right:2em">
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Profile
+                            {{currUser}}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">My Profile</a>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="/profile">My Profile</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -53,13 +53,12 @@
             </div>
         </div>
         <br/>
-        
         <div class="container">
           <div class="row justify-content-center">
-            {{#each events}}
+            {{#each matchedAct}}
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="../../public/images/event.jpg"/>
+                        <img class="card-img-top" src="{{eventImage.path}}" width="50" height="300" />
                         <div class="card-body">
                             <h5 class="card-title">{{eventName}}</h5>
                             <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >{{ eventDescription }}</p>
@@ -73,26 +72,16 @@
       </div>
 
     </main>
-
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
-
     <footer class="page-footer font-small indigo">
-        <div class="footer-copyright text-center py-3 ">© 2018 Copyright</div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body>
+    
+	<script src="https://rawgit.com/leizongmin/js-xss/master/dist/xss.js"></script>
+<script>
+// apply function filterXSS in the same way
+	filterXSS('<script>alert("xss");</scr' + 'ipt>');
+</script> 
+	</body>
 </html> 

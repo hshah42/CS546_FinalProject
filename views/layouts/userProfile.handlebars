@@ -1,0 +1,102 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Activity</title>
+    <link rel="stylesheet" href="../../public/comments.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Activity Tracker</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/events">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/createEvents">Create</span> </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/userListing">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contacts">Contact Us</a>
+                    </li>
+                </ul>
+                 <ul class="navbar-nav my-1 my-lg-0" style="padding-right:2em">
+                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{currUser.currUser}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item active" href="/profile">My Profile<span class="sr-only">(current)</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    
+    <main style=" background-image: url('../../public/images/event.jpg');">
+        <div class="card" style="width: 65%; margin: 0 auto; float: none; margin-bottom: 10px; height: 100%">
+            <img class="card-img-top" src="/imageUploads/defaultUser.png" height="50%" width="100%"/>
+            <div class="row justify-content-center" style="padding-left: 10%">
+                <div class="col-sm-8">
+                    <h2 class="mt-4">{{ user.userName }}</h2>
+                    <h3 class="mt-4"><b>Name:</b> {{ user.usersname }}, {{ user.usersAge }} </h3>
+                    <h3 class="mt-4"><b>Email:</b> {{ user.userEmail }}</h3>
+                    <h3 class="mt-4"><b>Interests:</b></h3>
+                    <ul>
+                        {{#each user.usersInterests}}
+                            <li>{{ this }}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <br>
+                    <p>
+                        <form id="Rate">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Rate
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" value="1" href="/updateRating?id={{user._id}}&value=1">1</a>
+                                    <a class="dropdown-item" value="2" href="/updateRating?id={{user._id}}&value=2">2</a>
+                                    <a class="dropdown-item" value="3" href="/updateRating?id={{user._id}}&value=3">3</a>
+                                    <a class="dropdown-item" value="4" href="/updateRating?id={{user._id}}&value=4">4</a>
+                                    <a class="dropdown-item" value="5" href="/updateRating?id={{user._id}}&value=5">5</a>
+                                </div>
+                            </div>
+                        </form>
+                    </p>
+                    <h3 class="mt-4">Overall Rating:</h3>
+                    <strong>{{user.avgRating}}</strong>
+                    <h3 class="mt-4">Phone Number:</h3>
+                    <strong>{{ user.usersPhoneNumber }}</strong>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://rawgit.com/leizongmin/js-xss/master/dist/xss.js"></script>
+	<script>
+		// apply function filterXSS in the same way
+	filterXSS('<script>alert("xss");</scr' + 'ipt>');
+	</script> 
+	</body>
+</html>
